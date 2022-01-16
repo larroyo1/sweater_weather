@@ -6,6 +6,7 @@ RSpec.describe WeatherFacade do
     weather = WeatherFacade.weather_info(location)
 
     expect(weather).to be_a(Weather)
+    expect(weather.id).to be(nil)
     expect(weather.current_weather).to be_a(Hash)
     expect(weather.current_weather.keys.count).to eq(15)
     expect(weather.hourly_weather).to be_a(Array)
