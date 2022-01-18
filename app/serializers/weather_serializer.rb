@@ -27,4 +27,15 @@ class WeatherSerializer
       }
     end
   end
+
+  attribute :hourly_weather do |weather|
+    weather.hourly_weather.map do |hourly_weather|
+      {
+        time: Time.at(hourly_weather[:dt]).to_datetime,
+        temperature: hourly_weather[:temp],
+        conditions: hourly_weather[:weather][0][:description],
+        icon: hourly_weather[:weather][0][:icon]
+      }
+    end
+  end
 end

@@ -4,7 +4,6 @@ RSpec.describe 'Weather API' do
   before(:each) do
     get '/api/v1/forecast?location=denver,co'
     @results = JSON.parse(response.body, symbolize_names: true)
-    require "pry"; binding.pry
   end
 
   it 'gets a response' do
@@ -21,5 +20,11 @@ RSpec.describe 'Weather API' do
     daily_weather = @results[:data][:attributes][:daily_weather].first
 
     expect(daily_weather.keys).to eq([:date, :sunrise, :sunset, :max_temp, :min_temp, :conditions, :icon])
+  end
+
+  it 'has the correct information for hourly_weather' do
+    hourly_weather = @results[:data][:attributes][:hourly_weather].first
+
+    expect(hourly_weather.keys).to eq([:time, :temperature, :conditions, :icon])
   end
 end
