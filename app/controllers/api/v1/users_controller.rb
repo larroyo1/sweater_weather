@@ -3,9 +3,12 @@ class Api::V1::UsersController < ApplicationController
   def create
     new_user = User.new(user_params)
     assign_api_key(new_user)
-    new_user.save!
 
-    render json: UsersSerializer.new(new_user), status: :created
+    if new_user.save
+      render json: UsersSerializer.new(new_user), status: :created
+    else
+      render json: { errors: "Error creating user"}, status: :bad_request
+    end
   end
 
   private
