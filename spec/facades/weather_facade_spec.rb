@@ -8,7 +8,7 @@ RSpec.describe WeatherFacade do
     expect(weather).to be_a(Weather)
     expect(weather.id).to be(nil)
     expect(weather.current_weather).to be_a(Hash)
-    expect(weather.current_weather.keys.count).to eq(15)
+    expect(weather.current_weather.keys.count).to eq(14)
     expect(weather.hourly_weather).to be_a(Array)
     expect(weather.hourly_weather.first.keys.count).to eq(14)
     expect(weather.daily_weather).to be_a(Array)
